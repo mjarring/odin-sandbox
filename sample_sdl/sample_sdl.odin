@@ -3,6 +3,7 @@ package main
 import "base:runtime"
 import "core:c"
 import "core:fmt"
+import "core:math"
 import sdl "vendor:sdl3"
 
 App_State :: struct {
@@ -44,11 +45,12 @@ app_init :: proc "c" (appstate: ^rawptr, argc: c.int, argv: [^]cstring) -> sdl.A
 app_iterate :: proc "c" (appstate: rawptr) -> sdl.AppResult {
 	state := cast(^App_State)appstate
 
-	red := cast(sdl.Uint8)sdl.GetTicks() % 255
-	green := cast(sdl.Uint8)sdl.GetTicks() % 255
-	blue := cast(sdl.Uint8)sdl.GetTicks() % 255
+	current_time_seconds := cast(f32)sdl.GetTicks() / 1000.0
+	red := 0.5 + 0.5 * math.sin(current_time_seconds)
+	green := 0.5 + 0.5 * math.sin(current_time_seconds + math.PI * 2 / 3)
+	blue := 0.5 + 0.5 * math.sin(current_time_seconds + math.PI * 4 / 3)
 
-	sdl.SetRenderDrawColor(state.renderer, red, green, blue, 255)
+	sdl.SetRenderDrawColorFloat(state.renderer, red, green, blue, sdl.ALPHA_OPAQUE_FLOAT)
 	sdl.RenderClear(state.renderer)
 
 	sdl.RenderPresent(state.renderer)
