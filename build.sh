@@ -13,7 +13,6 @@ Options:
   -h, --help    Display this help message and exit.
 
 Arguments:
-  hellope       Builds hellope program
   sample_sdl    Builds SDL sample program
 EOF
 }
@@ -40,10 +39,6 @@ mkdir -p build
 
 # --- Build Everything (@build_targets) ---------------------------------------
 cd build
-if [[ "${hellope:-0}" == "1" ]]; then
-  echo "[building hellope]"
-  didbuild=1 && $compile ../hellope/
-fi
 if [[ "${sample_sdl:-0}" == "1" ]]; then
   echo "[building sample_sdl]"
   didbuild=1 && $compile ../sample_sdl/
