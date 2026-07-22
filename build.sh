@@ -41,7 +41,7 @@ mkdir -p build
 cd build
 if [[ "${sample_sdl:-0}" == "1" ]]; then
   echo "[building sample_sdl]"
-  didbuild=1 && $compile ../sample_sdl/
+  didbuild=1 && $compile ../src/sample_sdl/
 fi
 cd ..
 
