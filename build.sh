@@ -28,6 +28,7 @@ for arg in "$@"; do
 done
 if [[ "$#" == "0" ]]; then marathoner='1'; fi
 
+# --- Compile Mode ---
 if [[ "${release:-0}" == "1" ]]; then
   echo "[release mode]"
   compile="odin build"
@@ -35,6 +36,9 @@ elif [[ "${debug:-1}" == "1" ]]; then
   echo "[debug mode]"
   compile="odin build -debug"
 fi
+
+# --- Compile Flags ---
+flags="-custom-attribute:raddbg_type_view"
 
 # --- Prep Directories --------------------------------------------------------
 mkdir -p build
@@ -47,7 +51,7 @@ if [[ "${sample_sdl:-0}" == "1" ]]; then
 fi
 if [[ "${marathoner:-0}" == "1" ]]; then
   echo "[building marathoner]"
-  didbuild=1 && $compile ../src/marathoner/
+  didbuild=1 && $compile $flags ../src/marathoner/
 fi
 cd ..
 
