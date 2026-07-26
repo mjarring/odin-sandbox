@@ -28,13 +28,20 @@ for arg in "$@"; do
 done
 if [[ "$#" == "0" ]]; then marathoner='1'; fi
 
+# --- Compile Mode ---
 if [[ "${release:-0}" == "1" ]]; then
   echo "[release mode]"
   compile="odin build"
+  flags_mode=""
 elif [[ "${debug:-1}" == "1" ]]; then
   echo "[debug mode]"
-  compile="odin build -debug"
+  compile="odin build"
+  flags_mode="-debug -o:none"
 fi
+
+# --- Compile Flags ---
+flags_common="-strict-style -vet -warnings-as-errors"
+flags_all="$flags_mode $flags_common"
 
 # --- Prep Directories --------------------------------------------------------
 mkdir -p build
@@ -43,11 +50,11 @@ mkdir -p build
 cd build
 if [[ "${sample_sdl:-0}" == "1" ]]; then
   echo "[building sample_sdl]"
-  didbuild=1 && $compile ../src/sample_sdl/
+  didbuild=1 && $compile $flags_all ../src/sample_sdl/
 fi
 if [[ "${marathoner:-0}" == "1" ]]; then
   echo "[building marathoner]"
-  didbuild=1 && $compile ../src/marathoner/
+  didbuild=1 && $compile $flags_all ../src/marathoner/
 fi
 cd ..
 
