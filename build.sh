@@ -38,7 +38,7 @@ elif [[ "${debug:-1}" == "1" ]]; then
 fi
 
 # --- Compile Flags ---
-flags="-custom-attribute:raddbg_type_view"
+flags=""
 
 # --- Prep Directories --------------------------------------------------------
 mkdir -p build

@@ -1,3 +1,14 @@
 // raddbg 0.9.28 project file
 
 name: "odin-sandbox"
+target:
+{
+  executable: "build/marathoner"
+  working_directory: "build/"
+  enabled: 1
+}
+type_view:
+{
+  type: string
+  expr: "text(cast(void*)data, len)"
+}
