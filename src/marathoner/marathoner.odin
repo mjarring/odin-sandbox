@@ -1,10 +1,12 @@
 package main
 
+import "core:fmt"
 import "core:mem"
-import "core:os"
-import "core:strings"
+import wl "../../odin-wayland/"
 
-XDG_RUNTIME_DIR :: "XDG_RUNTIME_DIR"
+struct marathoner_state {
+  wl_display: ^wl.display
+}
 
 main :: proc() {
 	my_arena: mem.Arena
@@ -13,15 +15,12 @@ main :: proc() {
 	context.allocator = mem.arena_allocator(&my_arena)
 	defer free_all()
 
-	socket_path_builder: strings.Builder
-	strings.builder_init(&socket_path_builder)
-
-	xdg_runtime_dir, err := os.lookup_env(XDG_RUNTIME_DIR, context.allocator)
-  _ = err
-
-	strings.write_string(&socket_path_builder, xdg_runtime_dir)
-
-	socket_path := strings.to_string(socket_path_builder)
-  _ = socket_path
+  display := wl.display_connect(nil)
+  if display != nil {
+    fmt.println("Connected!")
+  } else {
+    fmt.println("Not connected!")
+    return
+  }
 
 }
