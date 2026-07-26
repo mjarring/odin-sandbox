@@ -1,6 +1,5 @@
 package main
 
-import "core:fmt"
 import "core:mem"
 import "core:os"
 import "core:strings"
@@ -18,9 +17,11 @@ main :: proc() {
 	strings.builder_init(&socket_path_builder)
 
 	xdg_runtime_dir, err := os.lookup_env(XDG_RUNTIME_DIR, context.allocator)
+  _ = err
 
 	strings.write_string(&socket_path_builder, xdg_runtime_dir)
 
 	socket_path := strings.to_string(socket_path_builder)
+  _ = socket_path
 
 }
