@@ -1,3 +1,6 @@
 [submodule "Odin"]
 	path = Odin
 	url = https://github.com/odin-lang/Odin.git
+[submodule "odin-wayland"]
+	path = src/odin-wayland
+	url = git@github.com:mjarring/odin-wayland.git
