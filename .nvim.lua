@@ -1,4 +1,4 @@
-vim.opt.makeprg = "./build.sh"
+vim.opt.makeprg = "./build.sh scanner"
 
 vim.cmd([[
   set errorformat+=%f(%l:%c)\ %m

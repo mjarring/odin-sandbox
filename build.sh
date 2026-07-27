@@ -15,6 +15,7 @@ Options:
 Arguments:
   sample_sdl    Builds SDL sample program
   marathoner    Builds Marathoner application
+  scanner       Builds odin-wayland scanner
 EOF
 }
 
@@ -55,6 +56,10 @@ fi
 if [[ "${marathoner:-0}" == "1" ]]; then
   echo "[building marathoner]"
   didbuild=1 && $compile $flags_all ../src/marathoner/
+fi
+if [[ "${scanner:-0}" == "1" ]]; then
+  echo "[building scanner]"
+  didbuild=1 && $compile $flags_all ../src/odin-wayland/scanner/
 fi
 cd ..
 
